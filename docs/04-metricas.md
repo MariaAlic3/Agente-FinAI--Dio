@@ -2,70 +2,55 @@
 
 ## Como Avaliar seu Agente
 
-A avaliação pode ser feita de duas formas complementares:
-
-1. **Testes estruturados:** Você define perguntas e respostas esperadas;
-2. **Feedback real:** Pessoas testam o agente e dão notas.
+A avaliação do FinAI foi estruturada em duas frentes complementares:
+1. **Testes estruturados:** Execução de perguntas direcionadas baseadas nos arquivos de dados locais para validar a precisão da IA.
+2. **Feedback real:** Teste prático de usabilidade considerando as limitações e o tempo de resposta do processamento local.
 
 ---
 
 ## Métricas de Qualidade
 
-| Métrica | O que avalia | Exemplo de teste |
+| Métrica | O que avalia | Cenário Prático no FinAI |
 |---------|--------------|------------------|
-| **Assertividade** | O agente respondeu o que foi perguntado? | Perguntar o saldo e receber o valor correto |
-| **Segurança** | O agente evitou inventar informações? | Perguntar algo fora do contexto e ele admitir que não sabe |
-| **Coerência** | A resposta faz sentido para o perfil do cliente? | Sugerir investimento conservador para cliente conservador |
-
-> [!TIP]
-> Peça para 3-5 pessoas (amigos, família, colegas) testarem seu agente e avaliarem cada métrica com notas de 1 a 5. Isso torna suas métricas mais confiáveis! Caso use os arquivos da pasta `data`, lembre-se de contextualizar os participantes sobre o **cliente fictício** representado nesses dados.
+| **Assertividade** | O agente respondeu o que foi perguntado? | Validar se ele calcula corretamente os gastos ou saldos com base no `transacoes.csv`. |
+| **Segurança** | O agente evitou inventar informações? | Garantir que ele use a frase de escape padrão se sairmos do escopo financeiro. |
+| **Coerência** | A resposta faz sentido para o perfil do cliente? | Checar se ele respeita o perfil moderado do João Silva ao sugerir investimentos. |
 
 ---
 
-## Exemplos de Cenários de Teste
+## Exemplos de Cenários de Teste (Aplicados ao João Silva)
 
-Crie testes simples para validar seu agente:
+Executamos os quatro testes fundamentais diretamente na interface do Streamlit para validar as regras de negócio:
 
 ### Teste 1: Consulta de gastos
-- **Pergunta:** "Quanto gastei com alimentação?"
-- **Resposta esperada:** Valor baseado no `transacoes.csv`
-- **Resultado:** [ ] Correto  [ ] Incorreto
+* **Pergunta:** "Quanto eu gastei com Moradia?"
+* **Resposta esperada:** O agente deve ler o arquivo `transacoes.csv`, identificar os lançamentos de saída na categoria "Moradia" e responder o valor exato sem julgar o cliente. Moradia: R$ 1.380,00
+(Aluguel R 1.200,00 + Conta de Luz R 180,00)
+* **Resultado:** [X] Correto  [ ] Incorreto
 
 ### Teste 2: Recomendação de produto
-- **Pergunta:** "Qual investimento você recomenda para mim?"
-- **Resposta esperada:** Produto compatível com o perfil do cliente
-- **Resultado:** [ ] Correto  [ ] Incorreto
+* **Pergunta:** "Qual investimento você recomenda para o meu perfil?"
+* **Resposta esperada:** O agente deve reconhecer que o João Silva possui perfil Moderado e recomendar produtos compatíveis (como CDB ou Tesouro), omitindo ações ou ativos de risco alto.
+* **Resultado:** [X] Correto  [ ] Incorreto
 
 ### Teste 3: Pergunta fora do escopo
-- **Pergunta:** "Qual a previsão do tempo?"
-- **Resposta esperada:** Agente informa que só trata de finanças
-- **Resultado:** [ ] Correto  [ ] Incorreto
+* **Pergunta:** "Qual a previsão do tempo para hoje?"
+* **Resposta esperada:** Ativação da frase de escape exata definida no prompt: *"Desculpe, como seu assistente FinAI, posso ajudar você apenas com o planejamento de suas metas..."*
+* **Resultado:** [X] Correto  [ ] Incorreto
 
 ### Teste 4: Informação inexistente
-- **Pergunta:** "Quanto rende o produto XYZ?"
-- **Resposta esperada:** Agente admite não ter essa informação
-- **Resultado:** [ ] Correto  [ ] Incorreto
+* **Pergunta:** "Quanto eu gastei com viagens internacionais nas minhas transações?"
+* **Resposta esperada:** Como essa categoria não existe no histórico, o agente deve informar de maneira clara e amigável que não encontrou registros desse gasto na base de dados.
+* **Resultado:** [X] Correto  [ ] Incorreto
 
 ---
 
-## Resultados
-
-Após os testes, registre suas conclusões:
+## Resultados e Conclusões
 
 **O que funcionou bem:**
-- [Liste aqui]
+* **Aderência perfeita às regras do System Prompt:** O modelo local respeitou rigorosamente a postura acolhedora (UX Empática), a frase de escape e a restrição aos dados fornecidos (Grounding).
+* **Estabilidade da Interface:** A remoção do limite de tempo (`timeout=None`) funcionou perfeitamente, permitindo que a interface gráfica espere o processamento completo do hardware sem gerar erros na tela.
 
 **O que pode melhorar:**
-- [Liste aqui]
-
----
-
-## Métricas Avançadas (Opcional)
-
-Para quem quer explorar mais, algumas métricas técnicas de observabilidade também podem fazer parte da sua solução, como:
-
-- Latência e tempo de resposta;
-- Consumo de tokens e custos;
-- Logs e taxa de erros.
-
-Ferramentas especializadas em LLMs, como [LangWatch](https://langwatch.ai/) e [LangFuse](https://langfuse.com/), são exemplos que podem ajudar nesse monitoramento. Entretanto, fique à vontade para usar qualquer outra que você já conheça!
+* **Tempo de Resposta (Latência):** Por rodar de forma 100% local (`gpt-oss` via Ollama) em hardware convencional, a primeira resposta e o processamento de contextos densos demoram bastante.
+* **Próximo Passo:** Avaliar futuramente a integração com modelos leves via API em nuvem (como o Groq ou versões menores de LLMs) para comparar o tempo de resposta mantendo o custo zero.
