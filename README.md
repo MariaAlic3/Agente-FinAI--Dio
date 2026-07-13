@@ -28,22 +28,22 @@ A solução foi desenhada para rodar localmente com custo zero de infraestrutura
 
 ### 📦 Estrutura do Repositório
 
-📁 FinAi/
-│
+📁 FinAi/ 
+│ 
 ├── 📄 README.md                      # Esta documentação estratégica
-│
+│ 
 ├── 📁 data/                           # Base de conhecimento local (Mockada)
 │   ├── perfil_investidor.json        # Dados de perfil, metas e tolerância a risco
 │   ├── transacoes.csv                # Histórico de lançamentos e consumo
 │   ├── historico_atendimento.csv     # Histórico de interações anteriores
 │   └── produtos_financeiros.json     # Catálogo de produtos e serviços disponíveis
-│
+│ 
 ├── 📁 docs/                           # Detalhamento das etapas de engenharia
 │   ├── 01-documentacao-agente.md
 │   ├── 02-base-conhecimento.md
 │   ├── 03-prompts.md
 │   └── 04-metricas.md
-│
+│ 
 └── 📁 src/                            # Código-fonte da aplicação
 └── app.py                        # Script principal do ecossistema Streamlit
 
