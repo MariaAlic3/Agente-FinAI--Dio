@@ -1,149 +1,99 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+# 💰 FinAI — Mentor Financeiro Inteligente com IA Generativa Local
 
-## Contexto
+[![Python](https://img.shields.io/badge/Python-3.14-blue.svg)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Framework-Streamlit-FF4B4B.svg)](https://streamlit.io/)
+[![Ollama](https://img.shields.io/badge/LLM-gpt--oss%20(Local)-000000.svg)](https://ollama.ai/)
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
+O **FinAI** é um agente financeiro consultivo e inteligente desenvolvido para transformar dados financeiros brutos em uma jornada de planejamento leve, humana e altamente personalizada. O projeto foi construído do zero como parte do desafio prático de Automação de Dados com IA (DIO / Afya / Programadores do Amanhã).
 
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
-
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+Diferente de chatbots tradicionais e frios, o FinAI atua como um mentor proativo e empático, utilizando modelos de linguagem de código aberto rodando de forma 100% local para garantir a privacidade absoluta dos dados bancários do usuário.
 
 ---
 
-## O Que Você Deve Entregar
+## 🎯 Caso de Uso e Dor Resolvida
 
-### 1. Documentação do Agente
+Muitas pessoas abandonam o planejamento orçamentário por enfrentarem interfaces complexas ou abordagens robóticas e punitivas sobre seus hábitos de consumo. 
 
-Defina **o que** seu agente faz e **como** ele funciona:
-
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
-
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+O FinAI resolve esse problema ao atuar como um **mentor financeiro empático e consultivo**. Ele consome dados consolidados do cliente para extrair insights precisos sobre o orçamento e guiar o planejamento de metas ativas de forma estritamente matemática, técnica e acolhedora — eliminando completamente qualquer viés de julgamento (*UX Empática*).
 
 ---
 
-### 2. Base de Conhecimento
+## 🛠️ Stack Tecnológica & Arquitetura
 
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
+A solução foi desenhada para rodar localmente com custo zero de infraestrutura e máxima proteção de dados:
 
-| Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `transacoes.csv` | CSV | Histórico de transações do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
-| `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
-| `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
+*   **Interface do Usuário:** Interface de chat interativa desenvolvida com **Streamlit**.
+*   **Orquestração e Dados:** **Pandas** e **JSON** para o carregamento e injeção dinâmica da base de conhecimento em memória.
+*   **Engine de IA:** **Ollama** servindo o modelo local `gpt-oss` via requisições HTTP (`requests`).
 
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
+### 📦 Estrutura do Repositório
 
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
-
----
-
-### 3. Prompts do Agente
-
-Documente os prompts que definem o comportamento do seu agente:
-
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
-
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
-
----
-
-### 4. Aplicação Funcional
-
-Desenvolva um **protótipo funcional** do seu agente:
-
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
-
-📁 **Pasta:** [`src/`](./src/)
-
----
-
-### 5. Avaliação e Métricas
-
-Descreva como você avalia a qualidade do seu agente:
-
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
-
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
-
----
-
-### 6. Pitch
-
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
-
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
-
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
-
----
-
-## Ferramentas Sugeridas
-
-Todas as ferramentas abaixo possuem versões gratuitas:
-
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
-
----
-
-## Estrutura do Repositório
-
-```
-📁 lab-agente-financeiro/
+📁 FinAi/
 │
-├── 📄 README.md
+├── 📄 README.md                      # Esta documentação estratégica
 │
-├── 📁 data/                          # Dados mockados para o agente
-│   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
-│   ├── perfil_investidor.json        # Perfil do cliente (JSON)
-│   ├── produtos_financeiros.json     # Produtos disponíveis (JSON)
-│   └── transacoes.csv                # Histórico de transações (CSV)
+├── 📁 data/                           # Base de conhecimento local (Mockada)
+│   ├── perfil_investidor.json        # Dados de perfil, metas e tolerância a risco
+│   ├── transacoes.csv                # Histórico de lançamentos e consumo
+│   ├── historico_atendimento.csv     # Histórico de interações anteriores
+│   └── produtos_financeiros.json     # Catálogo de produtos e serviços disponíveis
 │
-├── 📁 docs/                          # Documentação do projeto
-│   ├── 01-documentacao-agente.md     # Caso de uso e arquitetura
-│   ├── 02-base-conhecimento.md       # Estratégia de dados
-│   ├── 03-prompts.md                 # Engenharia de prompts
-│   ├── 04-metricas.md                # Avaliação e métricas
-│   └── 05-pitch.md                   # Roteiro do pitch
+├── 📁 docs/                           # Detalhamento das etapas de engenharia
+│   ├── 01-documentacao-agente.md
+│   ├── 02-base-conhecimento.md
+│   ├── 03-prompts.md
+│   └── 04-metricas.md
 │
-├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
-│
-├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
-```
+└── 📁 src/                            # Código-fonte da aplicação
+└── app.py                        # Script principal do ecossistema Streamlit
+
 
 ---
 
-## Dicas Finais
+## 🧠 Engenharia de Prompts e Engenharia de Segurança
 
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
+O comportamento do FinAI foi blindado via *System Prompt* estruturado sob quatro pilares fundamentais:
+
+1.  **Postura Sem Julgamentos:** O agente avalia gastos sob uma ótica estritamente técnica e matemática. Palavras como "errado" ou "irresponsável" são proibidas.
+2.  **Grounding Absoluto (Anti-Alucinação):** A IA é restrita a responder perguntas baseando-se unicamente nas tabelas e perfis injetados da pasta `data/`. Ela não inventa produtos ou taxas inexistentes.
+3.  **Mecanismo de Escape (Edge Cases):** Perguntas fora do escopo de finanças disparam uma frase de escape padronizada para manter a segurança do fluxo de atendimento.
+4.  **Concisão e Acessibilidade:** Respostas estruturadas em tópicos curtos de Markdown, utilizando uma linguagem inclusiva e livre de jargões complexos.
+
+---
+
+## ⚡ Resiliência e Engenharia de Infraestrutura Local
+
+Durante os testes em ambiente com hardware convencional, identificou-se uma alta latência no processamento inicial do modelo local `gpt-oss`. 
+
+**Solução Aplicada:** O código foi otimizado removendo o limite de espera HTTP padrão (`timeout=None`). Com isso, a aplicação do Streamlit ganhou resiliência, aguardando de forma estável o processamento completo do modelo local sem apresentar quebras ou travamentos de tela para o usuário, garantindo uma experiência de uso contínua.
+
+---
+
+## 🧪 Avaliação e Casos de Teste
+
+O agente foi submetido a uma esteira de testes estruturados de qualidade:
+
+*   **Teste de Assertividade (Consulta de Gastos):** Validou com sucesso os cálculos de categorias do arquivo `transacoes.csv`.
+*   **Teste de Coerência (Recomendação):** Recomendou apenas produtos adequados ao perfil moderado do cliente fictício (João Silva), ignorando ativos de alto risco.
+*   **Teste de Segurança (Inexistência e Escopo):** Negou com sucesso perguntas de escopo externo (previsão do tempo) usando a frase de escape regulamentada.
+
+---
+
+## 🎬 Assista ao meu Pitch e Demonstração
+
+Gravei uma apresentação executiva em estilo *Pitch* de 3 minutos resumindo o modelo de negócios, a arquitetura e exibindo a tela da IA funcionando na prática.
+
+🔗 https://youtu.be/gndPfIeLcu0
+
+---
+
+### 🚀 Como Executar o Projeto Localmente
+
+1. Certifique-se de ter o **Ollama** instalado e inicie o modelo no terminal:
+   ```bash
+   ollama run gpt-oss
+Execute o Streamlit apontando para o interpretador do seu ambiente:
+
+Bash
+python -m streamlit run src/app.py
+
